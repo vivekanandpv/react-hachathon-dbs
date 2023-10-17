@@ -5,10 +5,12 @@ import CustomerList from './components/CustomerList';
 import CustomerForm from './components/CustomerForm';
 import CustomerDetail from './components/CustomerDetail';
 import NotFound from './components/NotFound';
+import Navbar from './components/Navbar';
 
 const App = (props) => {
   return (
     <>
+      <Navbar />
       <h2>React Hackathon</h2>
       <hr />
       <Switch>
