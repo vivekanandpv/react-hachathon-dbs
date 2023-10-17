@@ -11,15 +11,17 @@ const App = (props) => {
   return (
     <>
       <Navbar />
-      <h2>React Hackathon</h2>
-      <hr />
-      <Switch>
-        <Route exact path='/' component={Home} />
-        <Route exact path='/customers' component={CustomerList} />
-        <Route exact path='/customer-form' component={CustomerForm} />
-        <Route exact path='/customer-detail/:id' component={CustomerDetail} />
-        <Route component={NotFound} />
-      </Switch>
+      <div className='p-5'>
+        <h2>React Hackathon</h2>
+        <hr />
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <Route exact path='/customers' component={CustomerList} />
+          <Route exact path='/customer-form' component={CustomerForm} />
+          <Route exact path='/customer-detail/:id' component={CustomerDetail} />
+          <Route component={NotFound} />
+        </Switch>
+      </div>
     </>
   );
 };
