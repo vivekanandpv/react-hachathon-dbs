@@ -1,12 +1,18 @@
 import React from 'react';
 import customerList from '../data.json';
+import { useHistory } from 'react-router-dom';
 
 const CustomerList = (props) => {
   const [customers, setCustomers] = React.useState([]);
+  const history = useHistory();
 
   React.useEffect(() => {
     setCustomers((_) => customerList);
   }, []);
+
+  const handleNavigation = (id) => {
+    history.push(`/customer-detail/${id}`);
+  };
 
   return (
     <>
@@ -18,6 +24,7 @@ const CustomerList = (props) => {
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -27,6 +34,14 @@ const CustomerList = (props) => {
               <td>{c.firstName}</td>
               <td>{c.lastName}</td>
               <td>{c.email}</td>
+              <td>
+                <button
+                  className='btn btn-primary btn-sm'
+                  onClick={() => handleNavigation(c.id)}
+                >
+                  Details
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
