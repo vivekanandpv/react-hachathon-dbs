@@ -12,8 +12,6 @@ const App = (props) => {
     <>
       <Navbar />
       <div className='p-5'>
-        <h2>React Hackathon</h2>
-        <hr />
         <Switch>
           <Route exact path='/' component={Home} />
           <Route exact path='/customers' component={CustomerList} />
