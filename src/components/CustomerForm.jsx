@@ -2,8 +2,11 @@ import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { httpService } from '../http-service';
+import { useHistory } from 'react-router-dom';
 
 const CustomerForm = (props) => {
+  const history = useHistory();
+
   const validationSchema = Yup.object({
     firstName: Yup.string().required('First name is required'),
     lastName: Yup.string().required('Last name is required'),
@@ -21,9 +24,11 @@ const CustomerForm = (props) => {
       .post('customers', formData)
       .then((r) => {
         console.log('Success', r);
+        history.push('/customers');
       })
       .catch((e) => {
         console.log('Error', e.message);
+        alert('Error!');
       });
   };
 

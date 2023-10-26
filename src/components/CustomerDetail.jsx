@@ -1,13 +1,21 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import customerList from '../data.json';
+import { httpService } from '../http-service';
 
 const CustomerDetail = (props) => {
   const { id } = useParams();
   const [currentCustomer, setCurrentCustomer] = React.useState({});
 
   React.useEffect(() => {
-    setCurrentCustomer((_) => customerList.find((c) => c.id === +id));
+    httpService
+      .get(`customers/${id}`)
+      .then((r) => {
+        setCurrentCustomer((_) => r.data);
+      })
+      .catch((e) => {
+        console.log('error', e.message);
+      });
   }, []);
 
   return (
@@ -17,7 +25,7 @@ const CustomerDetail = (props) => {
         <tbody>
           <tr>
             <th>Id</th>
-            <td>{currentCustomer.id}</td>
+            <td>{currentCustomer.customerId}</td>
           </tr>
           <tr>
             <th>First Name</th>

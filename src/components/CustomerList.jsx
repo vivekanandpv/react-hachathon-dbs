@@ -1,13 +1,16 @@
 import React from 'react';
 import customerList from '../data.json';
 import { useHistory } from 'react-router-dom';
+import { httpService } from '../http-service';
 
 const CustomerList = (props) => {
   const [customers, setCustomers] = React.useState([]);
   const history = useHistory();
 
   React.useEffect(() => {
-    setCustomers((_) => customerList);
+    httpService.get('customers').then((r) => {
+      setCustomers((_) => r.data);
+    });
   }, []);
 
   const handleNavigation = (id) => {
@@ -29,15 +32,15 @@ const CustomerList = (props) => {
         </thead>
         <tbody>
           {customers.map((c) => (
-            <tr key={c.id}>
-              <td>{c.id}</td>
+            <tr key={c.customerId}>
+              <td>{c.customerId}</td>
               <td>{c.firstName}</td>
               <td>{c.lastName}</td>
               <td>{c.email}</td>
               <td>
                 <button
                   className='btn btn-primary btn-sm'
-                  onClick={() => handleNavigation(c.id)}
+                  onClick={() => handleNavigation(c.customerId)}
                 >
                   Details
                 </button>
